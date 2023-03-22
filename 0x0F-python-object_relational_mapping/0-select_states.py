@@ -6,22 +6,10 @@ database `hbtn_0e_0_usa`.
 
 import MySQLdb
 
-# Connect to the hbtn_0e_0_usa database
-conn = mysqldb.connect(database="hbtn_0e_0_usa", user="root", password="root", host="localhost", port="3306")
+engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format("root", "root", "hbtn_0e_0_usa"), port=3306)
+Base.metadata.create_all(engine)
 
-# Open a cursor to perform database operations
-cur = conn.cursor()
-
-# Execute the SELECT statement to retrieve all states from the states table
-cur.execute("SELECT name FROM states")
-
-# Fetch all the results
-results = cur.fetchall()
-
-# Iterate through the results and print out the name of each state
-for row in results:
-    print(row[0])
-
-# Close the cursor and database connection
-cur.close()
-conn.close()
+session = Session(engine)
+for state in session.query(State).order_by(State.id).all(): # HERE: no SQL query, only objects!
+    print("{}: {}".format(state.id, state.name))
+session.close()
