@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-0-select_states.sql
->>>>>>> c689042928aa54194a82c27e2c9f34bc98f06ba0
 -- Create states table in hbtn_0e_0_usa with some data
 CREATE DATABASE IF NOT EXISTS hbtn_0e_0_usa;
 USE hbtn_0e_0_usa;
